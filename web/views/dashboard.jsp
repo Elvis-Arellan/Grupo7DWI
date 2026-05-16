@@ -13,20 +13,26 @@
 
         <c:if test="${ventasPendientes > 0}">
             <p style="color:orange">
-                 Tienes <b>${ventasPendientes}</b> venta(s) pendiente(s) de cobro.
+                Tienes <b>${ventasPendientes}</b> venta(s) pendiente(s) de cobro.
             </p>
         </c:if>
 
         <hr>
         <nav>
-            <a href="${pageContext.request.contextPath}/productos"> Productos</a>
+            <c:choose>
+                <c:when test="${sessionScope.usuario.rol eq 'ADMIN'}">
+                    <a href="${pageContext.request.contextPath}/admin/usuarios">Usuarios</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/clientes">Clientes</a>
+                </c:otherwise>
+            </c:choose>
             <span>|</span>
-            <a href="${pageContext.request.contextPath}/clientes"> Clientes</a>
+            <a href="${pageContext.request.contextPath}/productos">Productos</a>
             <span>|</span>
-            <a href="${pageContext.request.contextPath}/ventas"> Ventas</a>
+            <a href="${pageContext.request.contextPath}/ventas">Ventas</a>
             <span>|</span>
-            <a href="${pageContext.request.contextPath}/logout"> Cerrar sesión</a>
+            <a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a>
         </nav>
-
     </body>
 </html>

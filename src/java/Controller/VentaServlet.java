@@ -24,28 +24,29 @@ public class VentaServlet extends HttpServlet {
     private IVentaDAO ventaDAO;
     private IClienteDAO clienteDAO;
     private IProductoDAO productoDAO;
-    
-      @Override
+
+    @Override
     public void init() {
-        ventaDAO    = new VentaDAOImpl();
-        clienteDAO  = new ClienteDAOImpl();
+        ventaDAO = new VentaDAOImpl();
+        clienteDAO = new ClienteDAOImpl();
         productoDAO = new ProductoDAOImpl();
     }
-    
-     @Override
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         String accion = req.getParameter("accion");
-        if (accion == null) accion = "listar";
+        if (accion == null) {
+            accion = "listar";
+        }
 
-         UsuarioDTO sesion = (UsuarioDTO) req.getSession().getAttribute("usuario");
+        UsuarioDTO sesion = (UsuarioDTO) req.getSession().getAttribute("usuario");
 
         try {
             switch (accion) {
                 case "nueva":
-                    // Necesita lista de clientes y productos para los selects
-                    req.setAttribute("clientes",  clienteDAO.listar(sesion.getIdUsuario()));
+                    req.setAttribute("clientes", clienteDAO.listar(sesion.getIdUsuario()));
                     req.setAttribute("productos", productoDAO.listar(sesion.getIdUsuario()));
                     req.getRequestDispatcher("/views/ventas/form.jsp").forward(req, res);
                     break;
@@ -53,7 +54,7 @@ public class VentaServlet extends HttpServlet {
                 case "ver":
                     int idVer = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("venta", ventaDAO.buscarPorId(idVer));
-                    req.getRequestDispatcher("/views/ventas/detalle.jsp").forward(req, res);
+                    req.getRequestDispatcher("/views/ventas/detalles.jsp").forward(req, res);
                     break;
 
                 case "pagar":
@@ -78,28 +79,26 @@ public class VentaServlet extends HttpServlet {
             req.getRequestDispatcher("/views/ventas/lista.jsp").forward(req, res);
         }
     }
-    
-      @Override
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         UsuarioDTO sesion = (UsuarioDTO) req.getSession().getAttribute("usuario");
 
         try {
-            // Leer arrays de productos enviados desde el formulario
-            String[] idsProducto    = req.getParameterValues("idProducto[]");
-            String[] cantidades     = req.getParameterValues("cantidad[]");
-            String[] precios        = req.getParameterValues("precioUnitario[]");
+            String[] idsProducto = req.getParameterValues("idProducto[]");
+            String[] cantidades = req.getParameterValues("cantidad[]");
+            String[] precios = req.getParameterValues("precioUnitario[]");
 
             if (idsProducto == null || idsProducto.length == 0) {
                 req.setAttribute("error", "Debes agregar al menos un producto.");
-                req.setAttribute("clientes",  clienteDAO.listar(sesion.getIdUsuario()));
+                req.setAttribute("clientes", clienteDAO.listar(sesion.getIdUsuario()));
                 req.setAttribute("productos", productoDAO.listar(sesion.getIdUsuario()));
                 req.getRequestDispatcher("/views/ventas/form.jsp").forward(req, res);
                 return;
             }
 
-            // Armar detalle
             List<DetalleVentaDTO> detalle = new ArrayList<>();
             double total = 0;
 
@@ -113,7 +112,6 @@ public class VentaServlet extends HttpServlet {
                 detalle.add(d);
             }
 
-            // Armar cabecera
             VentaDTO venta = new VentaDTO();
             venta.setIdUsuario(sesion.getIdUsuario());
             venta.setIdCliente(Integer.parseInt(req.getParameter("idCliente")));
@@ -127,9 +125,11 @@ public class VentaServlet extends HttpServlet {
         } catch (Exception e) {
             req.setAttribute("error", "Error al registrar venta: " + e.getMessage());
             try {
-                req.setAttribute("clientes",  clienteDAO.listar(sesion.getIdUsuario()));
+                req.setAttribute("clientes", clienteDAO.listar(sesion.getIdUsuario()));
                 req.setAttribute("productos", productoDAO.listar(sesion.getIdUsuario()));
-            } catch (Exception ex) { /* ignorar */ }
+            } catch (Exception ex) {
+                System.err.println(ex);
+            }
             req.getRequestDispatcher("/views/ventas/form.jsp").forward(req, res);
         }
     }

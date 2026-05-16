@@ -10,10 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-
 @WebServlet("/dashboard")
-public class DashboardServlet extends HttpServlet  {
+public class DashboardServlet extends HttpServlet {
 
     private IVentaDAO ventaDAO;
 
@@ -30,10 +28,10 @@ public class DashboardServlet extends HttpServlet  {
 
         try {
             req.setAttribute("ventasPendientes",
-                ventaDAO.listar(sesion.getIdUsuario())
-                        .stream()
-                        .filter(v -> "PENDIENTE".equals(v.getEstado()))
-                        .count());
+                    ventaDAO.listar(sesion.getIdUsuario())
+                            .stream()
+                            .filter(v -> "PENDIENTE".equals(v.getEstado()))
+                            .count());
         } catch (Exception e) {
             req.setAttribute("ventasPendientes", 0);
         }

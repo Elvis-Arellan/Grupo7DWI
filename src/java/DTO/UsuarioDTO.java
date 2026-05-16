@@ -8,15 +8,22 @@ public class UsuarioDTO {
     private String nombreCompleto;
     private String rol;
     private String estado;
+    private String fechaRegistro;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String userName, String nombreCompleto, String rol) {
+    public UsuarioDTO(int idUsuario, String userName, String clave, String nombreCompleto, String rol, String estado, String fechaRegistro) {
+        this.idUsuario = idUsuario;
         this.userName = userName;
+        this.clave = clave;
         this.nombreCompleto = nombreCompleto;
         this.rol = rol;
+        this.estado = estado;
+        this.fechaRegistro = fechaRegistro;
     }
+
+   
 
     public int getIdUsuario() {
         return idUsuario;
@@ -64,6 +71,14 @@ public class UsuarioDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
 }

@@ -27,6 +27,6 @@ public class Conexion {
     }
     
     public static void main(String[] args) {
-        Connection cd = conectandoDWI();//probando bbdd
+        Connection cd = conectandoDWI();
     }
 }

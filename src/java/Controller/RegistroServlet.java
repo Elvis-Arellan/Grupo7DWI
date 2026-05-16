@@ -20,51 +20,49 @@ public class RegistroServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/Grupo7DWI/views/registro.jsp").forward(request, response);
+        req.getRequestDispatcher("/Grupo7DWI/views/registro.jsp").forward(req, res);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String clave = request.getParameter("clave");
-        String confirmar = request.getParameter("confirmar");
-        String nombre = request.getParameter("nombreCompleto");
-        String rol = request.getParameter("rol");
+        String username = req.getParameter("username");
+        String clave = req.getParameter("clave");
+        String confirmar = req.getParameter("confirmar");
+        String nombre = req.getParameter("nombreCompleto");
+        String rol = req.getParameter("rol");
 
-        // Validaciones
         if (username == null || username.trim().isEmpty()
                 || clave == null || clave.trim().isEmpty()
                 || nombre == null || nombre.trim().isEmpty()) {
-            request.setAttribute("error", "Todos los campos son obligatorios.");
-            request.getRequestDispatcher("/views/registro.jsp").forward(request, response);
+            req.setAttribute("error", "Todos los campos son obligatorios.");
+            req.getRequestDispatcher("/views/registro.jsp").forward(req, res);
             return;
         }
 
         if (!clave.equals(confirmar)) {
-            request.setAttribute("error", "Las contraseñas no coinciden.");
-            request.getRequestDispatcher("/views/registro.jsp").forward(request, response);
+            req.setAttribute("error", "Las contraseñas no coinciden.");
+            req.getRequestDispatcher("/views/registro.jsp").forward(req, res);
             return;
         }
 
         if (clave.length() < 6) {
-            request.setAttribute("error", "La contraseña debe tener al menos 6 caracteres.");
-            request.getRequestDispatcher("/views/registro.jsp").forward(request, response);
+            req.setAttribute("error", "La contraseña debe tener al menos 6 caracteres.");
+            req.getRequestDispatcher("/views/registro.jsp").forward(req, res);
             return;
         }
 
-        // Validar que rol sea válido
         if (!"ADMIN".equals(rol) && !"VENDEDOR".equals(rol)) {
             rol = "VENDEDOR";
         }
 
         try {
             if (usuarioDAO.existeUsername(username.trim())) {
-                request.setAttribute("error", "El nombre de usuario ya está en uso.");
-                request.getRequestDispatcher("/views/registro.jsp").forward(request, response);
+                req.setAttribute("error", "El nombre de usuario ya está en uso.");
+                req.getRequestDispatcher("/views/registro.jsp").forward(req, res);
                 return;
             }
 
@@ -76,11 +74,11 @@ public class RegistroServlet extends HttpServlet {
 
             usuarioDAO.registrar(nuevo);
             System.out.println("Do post registro servlet manda al login.jsp registro ok");
-            response.sendRedirect(request.getContextPath() + "/login?msg=registro_ok");
+            res.sendRedirect(req.getContextPath() + "/login?msg=registro_ok");
 
         } catch (Exception e) {
-            request.setAttribute("error", "Error al registrar. Intenta de nuevo.");
-            request.getRequestDispatcher("/views/registro.jsp").forward(request, response);
+            req.setAttribute("error", "Error al registrar. Intenta de nuevo.");
+            req.getRequestDispatcher("/views/registro.jsp").forward(req, res);
         }
     }
 }

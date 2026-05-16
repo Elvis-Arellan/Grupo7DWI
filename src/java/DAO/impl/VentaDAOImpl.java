@@ -65,14 +65,12 @@ public class VentaDAOImpl implements IVentaDAO {
             }
         }
 
-        // Cargar detalle
         if (venta != null) {
             venta.setDetalle(listarDetalle(idVenta));
         }
         return venta;
     }
 
-    // Transacción: inserta venta + detalle + descuenta stock
     @Override
     public void registrar(VentaDTO venta) throws Exception {
         String sqlVenta = "INSERT INTO ventas (id_usuario, id_cliente, total, observacion) "
@@ -85,9 +83,8 @@ public class VentaDAOImpl implements IVentaDAO {
         Connection con = null;
         try {
             con = Conexion.conectandoDWI();
-            con.setAutoCommit(false);   // inicio transacción
+            con.setAutoCommit(false);   
 
-            // 1. Insertar cabecera de venta
             int idVenta;
             try (PreparedStatement ps = con.prepareStatement(sqlVenta,
                     Statement.RETURN_GENERATED_KEYS)) {
@@ -103,7 +100,6 @@ public class VentaDAOImpl implements IVentaDAO {
                 }
             }
 
-            // 2. Insertar detalle y descontar stock
             for (DetalleVentaDTO d : venta.getDetalle()) {
                 try (PreparedStatement ps = con.prepareStatement(sqlDetalle)) {
                     ps.setInt(1, idVenta);
@@ -120,11 +116,11 @@ public class VentaDAOImpl implements IVentaDAO {
                 }
             }
 
-            con.commit();   // confirmar todo
+            con.commit();   
 
         } catch (Exception e) {
             if (con != null) {
-                con.rollback();    // revertir si algo falla
+                con.rollback();    
             }
             throw e;
         } finally {
@@ -149,7 +145,6 @@ public class VentaDAOImpl implements IVentaDAO {
 
     @Override
     public void eliminar(int idVenta) throws Exception {
-        // CASCADE en BD elimina el detalle automáticamente
         String sql = "DELETE FROM ventas WHERE id_venta=?";
 
         try (Connection con = Conexion.conectandoDWI(); PreparedStatement ps = con.prepareStatement(sql)) {

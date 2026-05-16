@@ -77,7 +77,6 @@ public class ProductoDAOImpl implements IProductoDAO {
 
     @Override
     public void eliminar(int idProducto) throws Exception {
-        // Eliminación lógica
         String sql = "UPDATE productos SET estado = 'INACTIVO' WHERE id_producto = ?";
 
         try (Connection con = Conexion.conectandoDWI(); PreparedStatement ps = con.prepareStatement(sql)) {

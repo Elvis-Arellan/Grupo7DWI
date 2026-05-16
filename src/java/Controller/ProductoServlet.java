@@ -21,10 +21,6 @@ public class ProductoServlet extends HttpServlet {
     public void init() {
         productoDAO = new ProductoDAOImpl();
     }
-    //pa la api rest
-    // GET /productos          → lista
-    // GET /productos?accion=nuevo      → form vacío
-    // GET /productos?accion=editar&id= → form con datos
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -61,7 +57,6 @@ public class ProductoServlet extends HttpServlet {
         }
     }
 
-    // POST /productos → registrar o actualizar
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {

@@ -20,28 +20,27 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        HttpSession sesion = request.getSession(false);
+        HttpSession sesion = req.getSession(false);
         if (sesion != null && sesion.getAttribute("usuario") != null) {
             System.out.println("doget login servlet: Estoy dirigiendo al dashboard");
-            response.sendRedirect(request.getContextPath() + "/dashboard");
+            res.sendRedirect(req.getContextPath() + "/dashboard");
             return;
         }
-        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+        req.getRequestDispatcher("/views/login.jsp").forward(req, res);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String clave = request.getParameter("clave");
-        
-        // Validación básica de campos vacíos
+        String username = req.getParameter("username");
+        String clave = req.getParameter("clave");
+
         if (username == null || username.trim().isEmpty()
                 || clave == null || clave.trim().isEmpty()) {
-            request.setAttribute("error", "Completa todos los campos.");
-            request.getRequestDispatcher("/Grupo7DWI/views/login.jsp").forward(request, response);
+            req.setAttribute("error", "Completa todos los campos.");
+            req.getRequestDispatcher("/Grupo7DWI/views/login.jsp").forward(req, res);
             return;
         }
 
@@ -49,21 +48,21 @@ public class LoginServlet extends HttpServlet {
             UsuarioDTO usuario = usuarioDAO.buscarPorUsername(username.trim());
 
             if (usuario != null && PasswordUtil.verificar(clave, usuario.getClave())) {
-                HttpSession sesion = request.getSession(true);
+                HttpSession sesion = req.getSession(true);
                 sesion.setAttribute("usuario", usuario);
                 sesion.setAttribute("idUsuario", usuario.getIdUsuario());
                 sesion.setAttribute("rolUsuario", usuario.getRol());
-                sesion.setMaxInactiveInterval(30 * 60); 
+                sesion.setMaxInactiveInterval(30 * 60);
                 System.out.println("DOPOST login servlet: correctamente al dashboard");
-                response.sendRedirect("/Grupo7DWI/views/dashboard.jsp");
+                res.sendRedirect("/Grupo7DWI/views/dashboard.jsp");
             } else {
-                request.setAttribute("error", "Usuario o contraseña incorrectos.");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+                req.setAttribute("error", "Usuario o contraseña incorrectos.");
+                req.getRequestDispatcher("/views/login.jsp").forward(req, res);
             }
 
         } catch (Exception e) {
-            request.setAttribute("error", "Error del servidor. Intenta de nuevo.");
-            request.getRequestDispatcher("/Grupo7DWI/views/login.jsp").forward(request, response);
+            req.setAttribute("error", "Error del servidor. Intenta de nuevo.");
+            req.getRequestDispatcher("/Grupo7DWI/views/login.jsp").forward(req, res);
         }
     }
 }
