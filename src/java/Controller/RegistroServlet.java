@@ -75,7 +75,7 @@ public class RegistroServlet extends HttpServlet {
             nuevo.setRol(rol);
 
             usuarioDAO.registrar(nuevo);
-
+            System.out.println("Do post registro servlet manda al login.jsp registro ok");
             response.sendRedirect(request.getContextPath() + "/login?msg=registro_ok");
 
         } catch (Exception e) {

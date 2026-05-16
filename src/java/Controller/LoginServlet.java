@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession(false);
         if (sesion != null && sesion.getAttribute("usuario") != null) {
+            System.out.println("doget login servlet: Estoy dirigiendo al dashboard");
             response.sendRedirect(request.getContextPath() + "/dashboard");
             return;
         }
@@ -48,13 +49,12 @@ public class LoginServlet extends HttpServlet {
             UsuarioDTO usuario = usuarioDAO.buscarPorUsername(username.trim());
 
             if (usuario != null && PasswordUtil.verificar(clave, usuario.getClave())) {
-                // Crear sesión — NO guardar la clave en sesión
                 HttpSession sesion = request.getSession(true);
                 sesion.setAttribute("usuario", usuario);
                 sesion.setAttribute("idUsuario", usuario.getIdUsuario());
                 sesion.setAttribute("rolUsuario", usuario.getRol());
-                sesion.setMaxInactiveInterval(30 * 60); // 30 minutos
-
+                sesion.setMaxInactiveInterval(30 * 60); 
+                System.out.println("DOPOST login servlet: correctamente al dashboard");
                 response.sendRedirect("/Grupo7DWI/views/dashboard.jsp");
             } else {
                 request.setAttribute("error", "Usuario o contraseña incorrectos.");
