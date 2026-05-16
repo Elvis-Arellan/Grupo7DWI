@@ -12,5 +12,9 @@
         <p>Rol: ${sessionScope.usuario.rol}</p>
 
         <a href="${pageContext.request.contextPath}/views/login.jsp?salir=ok">Cerrar sesión</a>
+        <span>|</span>
+        <a href="${pageContext.request.contextPath}/productos">ver productos</a>
+        <span>|</span>
+        <a href="${pageContext.request.contextPath}/clientes">ver clientes</a>
     </body>
 </html>
