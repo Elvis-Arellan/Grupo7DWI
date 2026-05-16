@@ -118,7 +118,7 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label small text-white-50">Contraseña</label>
-                        <input type="password" name="clave" class="form-control" placeholder="••••••••" required>
+                        <input type="password" name="clave" class="form-control" placeholder="******" required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Entrar al Sistema</button>
                 </form>
