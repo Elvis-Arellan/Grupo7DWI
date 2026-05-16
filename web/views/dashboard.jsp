@@ -16,5 +16,7 @@
         <a href="${pageContext.request.contextPath}/productos">ver productos</a>
         <span>|</span>
         <a href="${pageContext.request.contextPath}/clientes">ver clientes</a>
+        <span>|</span>
+        <a href="${pageContext.request.contextPath}/ventas">Vender</a>
     </body>
 </html>
