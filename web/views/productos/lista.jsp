@@ -204,6 +204,10 @@
                         Usuarios
                     </a>
                 </c:if>
+                <a href="${pageContext.request.contextPath}/reportes" class="nav-link"> 
+                    <i class="bi bi-box-arrow-right"></i>
+                    Reportes
+                </a>
                 <a href="${pageContext.request.contextPath}/logout" class="nav-link">
                     <i class="bi bi-box-arrow-right"></i>
                     Cerrar sesión

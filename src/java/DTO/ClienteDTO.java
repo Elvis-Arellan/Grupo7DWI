@@ -9,6 +9,7 @@ public class ClienteDTO {
     private String telefono;
     private String estado;
     private String fechaRegistro;
+    private double deudaTotal;
 
     public ClienteDTO() {
     }
@@ -71,6 +72,14 @@ public class ClienteDTO {
 
     public String getNombreCompleto() {
         return nombre + " " + apellido;
+    }
+
+    public double getDeudaTotal() {
+        return deudaTotal;
+    }
+
+    public void setDeudaTotal(double deudaTotal) {
+        this.deudaTotal = deudaTotal;
     }
 
 }

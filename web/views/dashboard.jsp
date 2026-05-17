@@ -99,6 +99,10 @@
                 </div>
                 <hr class="text-secondary">
                 <div class="nav flex-column">
+                    <a href="${pageContext.request.contextPath}/productos" class="nav-link">
+                        <i class="bi bi-box-seam"></i>
+                        Productos
+                    </a>
                     <c:choose>
                         <c:when test="${sessionScope.usuario.rol eq 'ADMIN'}">
                             <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link">
@@ -113,13 +117,13 @@
                             </a>
                         </c:otherwise>
                     </c:choose>
-                    <a href="${pageContext.request.contextPath}/productos" class="nav-link">
-                        <i class="bi bi-box-seam"></i>
-                        Productos
-                    </a>
                     <a href="${pageContext.request.contextPath}/ventas" class="nav-link">
                         <i class="bi bi-cart-check"></i>
                         Ventas
+                    </a>
+                    <a href="${pageContext.request.contextPath}/reportes" class="nav-link"> 
+                        <i class="bi bi-box-arrow-right"></i>
+                        Reportes
                     </a>
                     <a href="${pageContext.request.contextPath}/logout" class="nav-link">
                         <i class="bi bi-box-arrow-right"></i>
