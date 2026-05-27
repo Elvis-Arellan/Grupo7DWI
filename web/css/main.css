@@ -1,0 +1,406 @@
+/* =============================================
+   Grupo7DWI - Estilos globales
+   ============================================= */
+
+/* Variables */
+:root {
+    --primary-bg: #0f0c29;
+    --sidebar-bg: rgba(255, 255, 255, 0.05);
+    --accent-color: #a29bfe;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background-attachment: fixed;
+    color: white;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* =============================================
+   Sidebar
+   ============================================= */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid var(--glass-border);
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.nav-link i {
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(162, 155, 254, 0.2);
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+/* =============================================
+   Contenido principal
+   ============================================= */
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+/* =============================================
+   Tarjetas de vidrio (glass)
+   ============================================= */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+}
+
+.stat-card {
+    border-left: 4px solid var(--accent-color);
+}
+
+.user-badge {
+    background: rgba(162, 155, 254, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.info-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 20px;
+    height: 100%;
+}
+
+/* =============================================
+   Tablas
+   ============================================= */
+.table-glass {
+    background: #0a0a1a;
+    border-radius: 20px;
+    overflow-x: auto;
+    border: 1px solid var(--glass-border);
+}
+
+.table {
+    color: white;
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+    background: #0a0a1a;
+}
+
+.table thead th {
+    background: #1a1a2e;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.table tbody tr {
+    background: #0a0a1a;
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    background: #0a0a1a;
+}
+
+.table tbody tr:hover td {
+    background: #1a1a2e;
+}
+
+/* =============================================
+   Botones
+   ============================================= */
+.btn-custom {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-custom:hover {
+    background: #8c84f7;
+    color: white;
+}
+
+.btn-outline-custom {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 8px 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-custom:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    background: #ffc107;
+    color: black;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background: #28a745;
+    color: white;
+}
+
+.btn-outline-light {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: #0f0c29;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    border: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #8e86f7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(162, 155, 254, 0.4);
+}
+
+.btn-success {
+    background: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+/* =============================================
+   Formularios
+   ============================================= */
+.form-label {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-control,
+.form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-radius: 12px;
+    padding: 12px 15px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(162, 155, 254, 0.25);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-select option {
+    color: black;
+}
+
+/* =============================================
+   Alertas
+   ============================================= */
+.alert-custom-success {
+    background: rgba(40, 167, 69, 0.15);
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    color: #8dffb1;
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+
+.alert-custom-danger {
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #ff9ca7;
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+
+.alert-custom-warning {
+    background: rgba(255, 193, 7, 0.15);
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    color: #ffd86b;
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+
+.alert-custom {
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #ffb3bd;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* =============================================
+   Badges / Etiquetas de estado
+   ============================================= */
+.badge-danger,
+.badge-inactive {
+    background: rgba(220, 53, 69, 0.25);
+    color: #ff9ca7;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge-success,
+.badge-active {
+    background: rgba(40, 167, 69, 0.25);
+    color: #8dffb1;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge-pendiente {
+    background: rgba(255, 193, 7, 0.25);
+    color: #ffd86b;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge-pagado {
+    background: rgba(40, 167, 69, 0.25);
+    color: #8dffb1;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge.bg-primary {
+    background: var(--accent-color) !important;
+}
+
+.badge.bg-secondary {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* =============================================
+   Reportes
+   ============================================= */
+.report-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.report-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+/* =============================================
+   Utilidades
+   ============================================= */
+.text-muted-custom {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.text-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.text-link:hover {
+    color: white;
+}
+
+hr {
+    border-color: var(--glass-border);
+    margin: 20px 0;
+}

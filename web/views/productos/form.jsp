@@ -10,101 +10,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-        <style>
-            :root {
-                --primary-bg: #0f0c29;
-                --sidebar-bg: rgba(255,255,255,0.05);
-                --accent-color: #a29bfe;
-                --glass-border: rgba(255,255,255,0.1);
-            }
-            body {
-                font-family: 'Poppins', sans-serif;
-                background: linear-gradient(
-                    135deg,
-                    #0f0c29 0%,
-                    #302b63 50%,
-                    #24243e 100%
-                    );
-                background-attachment: fixed;
-                color: white;
-                overflow-x: hidden;
-            }
-            .sidebar {
-                width: 260px;
-                height: 100vh;
-                position: fixed;
-                background: var(--sidebar-bg);
-                backdrop-filter: blur(10px);
-                border-right: 1px solid var(--glass-border);
-                padding: 20px;
-            }
-            .nav-link {
-                color: rgba(255,255,255,0.7);
-                padding: 12px 15px;
-                border-radius: 10px;
-                margin-bottom: 10px;
-                display: flex;
-                align-items: center;
-                transition: 0.3s;
-                text-decoration: none;
-            }
-            .nav-link i {
-                margin-right: 15px;
-                font-size: 1.1rem;
-            }
-            .nav-link:hover,
-            .nav-link.active {
-                background: rgba(162,155,254,0.2);
-                color: var(--accent-color);
-                transform: translateX(5px);
-            }
-            .main-content {
-                margin-left: 260px;
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 40px;
-            }
-            .glass-card {
-                background: rgba(255,255,255,0.05);
-                backdrop-filter: blur(15px);
-                border: 1px solid var(--glass-border);
-                border-radius: 20px;
-                padding: 35px;
-                max-width: 700px;
-                width: 100%;
-            }
-            .form-control {
-                background: rgba(255,255,255,0.08);
-                border: 1px solid rgba(255,255,255,0.1);
-                color: white;
-            }
-            .form-control:focus {
-                background: rgba(255,255,255,0.12);
-                color: white;
-                border-color: var(--accent-color);
-                box-shadow: none;
-            }
-            .form-label {
-                color: rgba(255,255,255,0.8);
-            }
-            .btn-custom {
-                background: var(--accent-color);
-                border: none;
-                color: white;
-            }
-            .btn-custom:hover {
-                background: #8c84f7;
-                color: white;
-            }
-        </style>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     </head>
     <body>
         <nav class="sidebar">
             <div class="text-center mb-4">
                 <i class="bi bi-shop text-primary" style="font-size:2rem;"></i>
-                <h5 class="text-white mt-2">Minimarket SaaS</h5>
+                <h5 class="text-white mt-2">Minimarket Mario</h5>
             </div>
             <hr class="text-secondary">
             <div class="nav flex-column">

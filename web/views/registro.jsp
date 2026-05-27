@@ -8,72 +8,7 @@
         <title>Registro</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-        <style>
-            :root {
-                --primary-bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-                --glass-bg: rgba(255, 255, 255, 0.1);
-                --glass-border: rgba(255, 255, 255, 0.2);
-                --accent-color: #a29bfe;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                background: var(--primary-bg);
-                background-attachment: fixed;
-                color: #ffffff;
-                min-height: 100vh;
-                margin: 0;
-            }
-
-            .glass-card {
-                background: var(--glass-bg);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                border: 1px solid var(--glass-border);
-                border-radius: 20px;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.37);
-            }
-
-            .form-control,
-            .form-select {
-                background: rgba(255,255,255,0.05);
-                border: 1px solid var(--glass-border);
-                color: #fff;
-                border-radius: 10px;
-            }
-
-            .form-control:focus,
-            .form-select:focus {
-                background: rgba(255,255,255,0.1);
-                color: #fff;
-                border-color: var(--accent-color);
-                box-shadow: 0 0 0 0.25rem rgba(162,155,254,0.25);
-            }
-
-            .btn-primary {
-                background: var(--accent-color);
-                border: none;
-                font-weight: 600;
-                transition: 0.3s;
-            }
-
-            .btn-primary:hover {
-                background: #8e86f7;
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(162,155,254,0.4);
-            }
-
-            .text-link {
-                color: rgba(255,255,255,0.7);
-                text-decoration: none;
-            }
-
-            .text-link:hover {
-                color: white;
-            }
-        </style>
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     </head>
 
     <body>
