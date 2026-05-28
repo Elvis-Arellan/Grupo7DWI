@@ -73,14 +73,20 @@
                                 <input type="date" name="hasta" class="form-control">
                             </div>
                             <div>
-                                <button type="submit" name="accion" value="pdfVentas" class="btn-custom">
-                                    <i class="bi bi-file-pdf me-1"></i> Descargar PDF
-                                </button>
+                                <label class="form-label" style="visibility:hidden;">-</label>
+                                <div>
+                                    <button type="submit" name="accion" value="pdfVentas" class="btn-custom">
+                                        <i class="bi bi-file-pdf me-1"></i> Descargar PDF
+                                    </button>
+                                </div>
                             </div>
                             <div>
-                                <button type="submit" name="accion" value="csvVentas" class="btn-outline-custom">
-                                    <i class="bi bi-file-spreadsheet me-1"></i> Descargar CSV
-                                </button>
+                                <label class="form-label" style="visibility:hidden;">-</label>
+                                <div>
+                                    <button type="submit" name="accion" value="csvVentas" class="btn-outline-custom">
+                                        <i class="bi bi-file-spreadsheet me-1"></i> Descargar CSV
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
