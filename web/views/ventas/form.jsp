@@ -12,39 +12,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     </head>
     <body>
-        <nav class="sidebar">
-            <div class="text-center mb-4">
-                <i class="bi bi-shop text-primary" style="font-size:2rem;"></i>
-                <h5 class="text-white mt-2">Minimarket Mario</h5>
-            </div>
-            <hr class="text-secondary">
-            <div class="nav flex-column">
-                <a href="${pageContext.request.contextPath}/views/dashboard.jsp" class="nav-link">
-                    <i class="bi bi-speedometer2"></i> Inicio
-                </a>
-                <a href="${pageContext.request.contextPath}/productos" class="nav-link">
-                    <i class="bi bi-box-seam"></i> Productos
-                </a>
-                <a href="${pageContext.request.contextPath}/clientes" class="nav-link">
-                    <i class="bi bi-people"></i> Clientes
-                </a>
-                <a href="${pageContext.request.contextPath}/ventas" class="nav-link active">
-                    <i class="bi bi-cart-check"></i> Ventas / Fiados
-                </a>
-                <c:if test="${sessionScope.usuario.rol eq 'ADMIN'}">
-                    <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link">
-                        <i class="bi bi-person-badge"></i> Usuarios
-                    </a>
-                </c:if>
-                <a href="${pageContext.request.contextPath}/reportes" class="nav-link"> 
-                    <i class="bi bi-box-arrow-right"></i>
-                    Reportes
-                </a>
-                <a href="${pageContext.request.contextPath}/logout" class="nav-link">
-                    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-                </a>
-            </div>
-        </nav>
+        <c:set var="activeNav" value="ventas" scope="request"/>
+        <jsp:include page="/views/_sidebar.jsp"/>
         <div class="main-content">
             <div class="container-fluid">
                 <div class="glass-card">

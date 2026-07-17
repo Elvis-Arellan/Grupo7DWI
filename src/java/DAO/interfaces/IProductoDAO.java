@@ -14,4 +14,6 @@ public interface IProductoDAO {
     void actualizar(ProductoDTO producto) throws Exception;
 
     void eliminar(int idProducto) throws Exception;
+
+    void registrarLote(int idUsuario, List<ProductoDTO> productos) throws Exception;
 }

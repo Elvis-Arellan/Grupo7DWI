@@ -12,45 +12,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
     </head>
     <body>
-        <nav class="sidebar">
-            <div class="text-center mb-4">
-                <i class="bi bi-shop text-primary" style="font-size:2rem;"></i>
-                <h5 class="text-white mt-2">Minimarket Mario</h5>
-            </div>
-            <hr class="text-secondary">
-            <div class="nav flex-column">
-                <a href="${pageContext.request.contextPath}/views/dashboard.jsp" class="nav-link">
-                    <i class="bi bi-speedometer2"></i>
-                    Inicio
-                </a>
-                <a href="${pageContext.request.contextPath}/productos" class="nav-link active">
-                    <i class="bi bi-box-seam"></i>
-                    Productos
-                </a>
-                <a href="${pageContext.request.contextPath}/clientes" class="nav-link">
-                    <i class="bi bi-people"></i>
-                    Clientes
-                </a>
-                <a href="${pageContext.request.contextPath}/ventas" class="nav-link">
-                    <i class="bi bi-cart-check"></i>
-                    Ventas / Fiados
-                </a>
-                <c:if test="${sessionScope.usuario.rol eq 'ADMIN'}">
-                    <a href="${pageContext.request.contextPath}/admin/usuarios" class="nav-link">
-                        <i class="bi bi-person-badge"></i>
-                        Usuarios
-                    </a>
-                </c:if>
-                <a href="${pageContext.request.contextPath}/reportes" class="nav-link"> 
-                    <i class="bi bi-box-arrow-right"></i>
-                    Reportes
-                </a>
-                <a href="${pageContext.request.contextPath}/logout" class="nav-link">
-                    <i class="bi bi-box-arrow-right"></i>
-                    Cerrar sesión
-                </a>
-            </div>
-        </nav>
+        <c:set var="activeNav" value="productos" scope="request"/>
+        <jsp:include page="/views/_sidebar.jsp"/>
         <div class="main-content">
             <div class="container-fluid">
                 <div class="glass-card">
@@ -59,10 +22,45 @@
                             <h2 class="fw-bold mb-0">Inventario de Productos</h2>
                             <p class="text-muted-custom">Gestión de productos del minimarket</p>
                         </div>
-                        <a href="${pageContext.request.contextPath}/productos?accion=nuevo" class="btn btn-custom">
-                            <i class="bi bi-plus-circle me-1"></i>
-                            Nuevo producto
-                        </a>
+                        <div class="d-flex gap-2">
+                            <button type="button" id="btnCargarApi" class="btn btn-outline-light">
+                                <i class="bi bi-cloud-download me-1"></i>
+                                Cargar vía API (fetch)
+                            </button>
+                            <a href="${pageContext.request.contextPath}/productos?accion=nuevo" class="btn btn-custom">
+                                <i class="bi bi-plus-circle me-1"></i>
+                                Nuevo producto
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="panelApi" class="glass-card mb-4" style="display:none;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold mb-0">
+                                <i class="bi bi-braces-asterisk me-2"></i>
+                                Resultado de <code>GET /api/productos</code>
+                            </h4>
+                            <button type="button" class="btn btn-sm btn-outline-light" onclick="document.getElementById('panelApi').style.display='none'">
+                                Cerrar
+                            </button>
+                        </div>
+                        <div id="estadoApi" class="mb-3 text-white-50">Cargando...</div>
+                        <div class="table-glass">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Precio</th>
+                                        <th>Stock</th>
+                                        <th>Mín.</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpoTablaApi">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <c:if test="${param.msg eq 'registrado'}">
                         <div class="alert-custom-success mb-4">
@@ -152,6 +150,51 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementById('btnCargarApi').addEventListener('click', function () {
+                var panel = document.getElementById('panelApi');
+                var estado = document.getElementById('estadoApi');
+                var cuerpo = document.getElementById('cuerpoTablaApi');
+
+                panel.style.display = 'block';
+                estado.textContent = 'Cargando productos desde /api/productos ...';
+                cuerpo.innerHTML = '';
+
+                fetch('${pageContext.request.contextPath}/api/productos')
+                    .then(function (respuesta) {
+                        if (!respuesta.ok) {
+                            throw new Error('HTTP ' + respuesta.status);
+                        }
+                        return respuesta.json();
+                    })
+                    .then(function (productos) {
+                        estado.textContent = 'Se obtuvieron ' + productos.length +
+                                ' producto(s) desde la API RESTful (GET /api/productos).';
+
+                        if (productos.length === 0) {
+                            cuerpo.innerHTML = '<tr><td colspan="6" class="text-center text-white-50 py-3">' +
+                                    'La API no devolvió productos.</td></tr>';
+                            return;
+                        }
+
+                        productos.forEach(function (p) {
+                            cuerpo.innerHTML +=
+                                    '<tr>' +
+                                    '<td>' + p.idProducto + '</td>' +
+                                    '<td><strong>' + p.nombre + '</strong></td>' +
+                                    '<td>' + (p.categoria || '-') + '</td>' +
+                                    '<td>S/ ' + Number(p.precio).toFixed(2) + '</td>' +
+                                    '<td>' + p.stockActual + '</td>' +
+                                    '<td>' + p.stockMinimo + '</td>' +
+                                    '</tr>';
+                        });
+                    })
+                    .catch(function (error) {
+                        estado.textContent = 'Error al consumir la API: ' + error.message;
+                        cuerpo.innerHTML = '';
+                    });
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

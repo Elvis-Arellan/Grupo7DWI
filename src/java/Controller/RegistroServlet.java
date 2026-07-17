@@ -1,22 +1,29 @@
 package Controller;
 
 import DAO.impl.UsuarioDAOImpl;
+import DAO.impl.ProductoDAOImpl;
 import DAO.interfaces.IUsuarioDAO;
+import DAO.interfaces.IProductoDAO;
+import DTO.ProductoDTO;
 import DTO.UsuarioDTO;
+import util.SeederProductos;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/registro")
 public class RegistroServlet extends HttpServlet {
 
     private IUsuarioDAO usuarioDAO;
+    private IProductoDAO productoDAO;
 
     @Override
     public void init() {
         usuarioDAO = new UsuarioDAOImpl();
+        productoDAO = new ProductoDAOImpl();
     }
 
     @Override
@@ -72,8 +79,17 @@ public class RegistroServlet extends HttpServlet {
             nuevo.setNombreCompleto(nombre.trim());
             nuevo.setRol(rol);
 
-            usuarioDAO.registrar(nuevo);
+            int idUsuarioCreado = usuarioDAO.registrar(nuevo);
             System.out.println("Do post registro servlet manda al login.jsp registro ok");
+
+            try {
+                List<ProductoDTO> plantilla = SeederProductos.leerPlantilla(getServletContext());
+                productoDAO.registrarLote(idUsuarioCreado, plantilla);
+                System.out.println("Productos de plantilla clonados para el usuario " + idUsuarioCreado);
+            } catch (Exception eSeed) {
+                System.out.println("Aviso: no se pudo clonar productos de plantilla: " + eSeed.getMessage());
+            }
+
             res.sendRedirect(req.getContextPath() + "/login?msg=registro_ok");
 
         } catch (Exception e) {

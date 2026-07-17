@@ -86,6 +86,41 @@ public class ProductoDAOImpl implements IProductoDAO {
         }
     }
 
+    @Override
+    public void registrarLote(int idUsuario, List<ProductoDTO> productos) throws Exception {
+        String sql = "INSERT INTO productos (id_usuario, nombre, categoria, precio, "
+                + "stock_actual, stock_minimo) VALUES (?, ?, ?, ?, ?, ?)";
+
+        Connection con = null;
+        try {
+            con = Conexion.conectandoDWI();
+            con.setAutoCommit(false);
+
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                for (ProductoDTO p : productos) {
+                    ps.setInt(1, idUsuario);
+                    ps.setString(2, p.getNombre());
+                    ps.setString(3, p.getCategoria());
+                    ps.setDouble(4, p.getPrecio());
+                    ps.setInt(5, p.getStockActual());
+                    ps.setInt(6, p.getStockMinimo());
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+
+            con.commit();
+        } catch (Exception e) {
+            if (con != null) con.rollback();
+            throw e;
+        } finally {
+            if (con != null) {
+                con.setAutoCommit(true);
+                con.close();
+            }
+        }
+    }
+
     private ProductoDTO mapear(ResultSet rs) throws SQLException {
         ProductoDTO p = new ProductoDTO();
         p.setIdProducto(rs.getInt("id_producto"));

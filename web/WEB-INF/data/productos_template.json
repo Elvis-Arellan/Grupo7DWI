@@ -1,0 +1,22 @@
+[
+  {"nombre":"Arroz Costeño 5kg","categoria":"Abarrotes","precio":22.50,"stockActual":30,"stockMinimo":5},
+  {"nombre":"Aceite Primor 1L","categoria":"Abarrotes","precio":9.80,"stockActual":25,"stockMinimo":5},
+  {"nombre":"Azúcar Rubia 1kg","categoria":"Abarrotes","precio":4.50,"stockActual":40,"stockMinimo":8},
+  {"nombre":"Fideos Don Vittorio 500g","categoria":"Abarrotes","precio":3.20,"stockActual":50,"stockMinimo":10},
+  {"nombre":"Leche Gloria Evaporada","categoria":"Lácteos","precio":4.10,"stockActual":35,"stockMinimo":8},
+  {"nombre":"Yogurt Gloria 1L","categoria":"Lácteos","precio":7.50,"stockActual":20,"stockMinimo":5},
+  {"nombre":"Queso Fresco 500g","categoria":"Lácteos","precio":12.00,"stockActual":15,"stockMinimo":3},
+  {"nombre":"Mantequilla Laive 200g","categoria":"Lácteos","precio":6.80,"stockActual":18,"stockMinimo":4},
+  {"nombre":"Coca Cola 1.5L","categoria":"Bebidas","precio":6.50,"stockActual":40,"stockMinimo":10},
+  {"nombre":"Inca Kola 1.5L","categoria":"Bebidas","precio":6.50,"stockActual":40,"stockMinimo":10},
+  {"nombre":"Agua San Luis 625ml","categoria":"Bebidas","precio":1.50,"stockActual":60,"stockMinimo":15},
+  {"nombre":"Cerveza Pilsen 620ml","categoria":"Bebidas","precio":7.00,"stockActual":30,"stockMinimo":6},
+  {"nombre":"Pan de molde Bimbo","categoria":"Panadería","precio":6.20,"stockActual":20,"stockMinimo":5},
+  {"nombre":"Galletas Soda Field","categoria":"Panadería","precio":2.30,"stockActual":45,"stockMinimo":10},
+  {"nombre":"Detergente Ariel 750g","categoria":"Limpieza","precio":11.90,"stockActual":22,"stockMinimo":5},
+  {"nombre":"Jabón Bolívar 150g","categoria":"Limpieza","precio":2.50,"stockActual":50,"stockMinimo":10},
+  {"nombre":"Papel Higiénico Suave x4","categoria":"Limpieza","precio":8.90,"stockActual":28,"stockMinimo":6},
+  {"nombre":"Shampoo Sedal 400ml","categoria":"Cuidado personal","precio":13.50,"stockActual":15,"stockMinimo":3},
+  {"nombre":"Pasta Dental Colgate","categoria":"Cuidado personal","precio":5.60,"stockActual":25,"stockMinimo":5},
+  {"nombre":"Huevos x30","categoria":"Abarrotes","precio":16.00,"stockActual":12,"stockMinimo":3}
+]

@@ -36,17 +36,22 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     }
 
     @Override
-    public void registrar(UsuarioDTO usuario) throws Exception {
+    public int registrar(UsuarioDTO usuario) throws Exception {
         String sql = "INSERT INTO usuarios (username, clave, nombre_completo, rol) "
                 + "VALUES (?, ?, ?, ?)";
 
-        try (Connection con = Conexion.conectandoDWI(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.conectandoDWI(); PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, usuario.getUserName());
             ps.setString(2, PasswordUtil.hashear(usuario.getClave()));
             ps.setString(3, usuario.getNombreCompleto());
             ps.setString(4, usuario.getRol());
             ps.executeUpdate();
+
+            try (ResultSet keys = ps.getGeneratedKeys()) {
+                keys.next();
+                return keys.getInt(1);
+            }
         }
     }
 
